@@ -6,25 +6,37 @@ import java.util.Observable;
 
 public class ServerMain extends Observable{
 	static ServerSocket serverSock;
+	static Thread clientAccept;
+	static boolean listening = true;
 	
 	public static void main(String[] args){
-		(new Thread() {
+		clientAccept = new Thread() {
 			@Override
 			public void run(){
 				try {
 					serverSock = new ServerSocket(4422);
 					
-					while(true){
+					while(listening){
 						Socket clientSock = serverSock.accept();
 						Thread t = new Thread(new ClientHandler(clientSock));
 						t.start();
 					}
 					
 				} catch (IOException e) {
-					e.printStackTrace();
+					
 				}
 			}
-		}).start();
+		};
+		
+		clientAccept.start();
+	}
+	
+	public static void endServer(){
+		try {
+			serverSock.close();
+		} catch (IOException e) {
+			
+		}
 	}
 	
 }

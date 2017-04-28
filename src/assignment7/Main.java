@@ -11,6 +11,7 @@ public class Main {
 	public static void main(String[] args){
 		ServerMain.main(args);
 		ClientMain clientMain = new ClientMain();
+		boolean done = false;
 
 		Scanner scanner = new Scanner(System.in);
 		
@@ -20,8 +21,24 @@ public class Main {
 		clientMain.clients.get(name).frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		clientMain.clients.get(name).frame.setVisible(true);
 		clientMain.clients.get(name).run();
-		if(scanner.nextLine().equals("quit")){
-			clientMain.disconnectClient(name);
+		
+		while(!done){
+			String input = scanner.nextLine();
+			Scanner parse = new Scanner(input);
+			
+			String cmd = parse.next();
+			
+			if(cmd.equals("quit")){
+				clientMain.disconnectClient(name);
+				ServerMain.endServer();
+				done = true;
+			}
+			else if(cmd.equals("send")){
+				String message = parse.nextLine().trim();
+				clientMain.clients.get(name).sendMessage(message);
+			}
+			
+			parse.close();
 		}
 		
 		scanner.close();
