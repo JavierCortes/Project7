@@ -41,6 +41,7 @@ public class Client {
 			bWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 			bWriter.write(m);
 			textArea.append(m+ "\n");
+			textArea.setCaretPosition(textArea.getDocument().getLength());
 			bWriter.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
