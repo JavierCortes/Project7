@@ -40,6 +40,7 @@ public class Client {
 		try {
 			bWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 			bWriter.write(m);
+			textArea.append(m+ "\n");
 			bWriter.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -61,7 +62,7 @@ public class Client {
 		int i = 0;
 		while(i<1000){
 			i++;
-			textArea.append("\n"+ i);
+			textArea.append(i+"\n");
 		}
 	}
 }
