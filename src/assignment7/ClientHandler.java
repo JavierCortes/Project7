@@ -18,6 +18,7 @@ public class ClientHandler implements Runnable {
 			in = new BufferedReader(
 					new InputStreamReader(socket.getInputStream()));
 			client = in.readLine();
+			ClientMain.clientHandlers.put(client, this);
 			
 			while(true){
 				String line = in.readLine();
@@ -27,13 +28,21 @@ public class ClientHandler implements Runnable {
 				}
 			}
 		} catch (IOException e){
-			e.printStackTrace();
+			
 		} finally{
 			try {
 				in.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	public void stop(){
+		try {
+			socket.close();
+		} catch (IOException e) {
+			
 		}
 	}
 

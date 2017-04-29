@@ -47,7 +47,7 @@ public class ChatGUI implements Initializable{
 	public void displayMessage(String line) {
 		
 		Platform.runLater(new Runnable(){
-
+			
 			@Override
 			public void run() {
 				String chat = label_chat.getText();

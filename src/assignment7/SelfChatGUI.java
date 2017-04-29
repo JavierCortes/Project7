@@ -34,6 +34,7 @@ public class SelfChatGUI extends Application{
 			return;
 		}
 		Scene scene = new Scene(root);
+		primaryStage.setTitle(user);
 		primaryStage.setScene(scene);
 		primaryStage.sizeToScene();
 		primaryStage.show();
