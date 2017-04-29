@@ -1,24 +1,19 @@
 package assignment7;
 
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javafx.application.Platform;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.beans.property.*;
+import javafx.beans.value.*;
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 
 public class ChatGUI implements Initializable{
 	String user;
+	private List<String> clientList = new ArrayList<String>();
 	@FXML
 	private Button btn_send;
 	@FXML
@@ -27,6 +22,8 @@ public class ChatGUI implements Initializable{
 	private Label label_chat;
 	@FXML
 	private ScrollPane scroll;
+	@FXML
+	private VBox vbox;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -68,5 +65,19 @@ public class ChatGUI implements Initializable{
 				scroll.setVvalue(scroll.getVmax());
 			}
 		});
+	}
+	
+	public void updateClientList(){
+		Iterator<String> it = ClientMain.clients.keySet().iterator();
+		
+		while(it.hasNext()){
+			String client = it.next();
+			if(!client.equals(user) && !clientList.contains(client)){
+				clientList.add(client);
+				
+				RadioButton r = new RadioButton(client);
+				vbox.getChildren().add(r);
+			}
+		}
 	}
 }

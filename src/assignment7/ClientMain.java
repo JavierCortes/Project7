@@ -57,6 +57,13 @@ public class ClientMain{
 			clientUI.put(client, s);
 			passwords.put(client, password);
 			s.openChat(client);
+			
+			Iterator<String> it = clientUI.keySet().iterator();
+			while(it.hasNext()){
+				String user = it.next();
+				
+				clientUI.get(user).gui.updateClientList();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
