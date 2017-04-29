@@ -24,7 +24,7 @@ public class ChatGUI implements Initializable{
 	private ScrollPane scroll;
 	@FXML
 	private VBox vbox;
-
+	private HashMap<String,CheckBox> cbs = new HashMap<String,CheckBox>();
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		btn_send.setOnAction(new EventHandler<ActionEvent>(){
@@ -32,7 +32,29 @@ public class ChatGUI implements Initializable{
 			public void handle(ActionEvent arg0) {
 				String message = text_chat.getText();
 				if(message!= null && (message.trim().length() > 0) ){
-					ClientMain.clients.get(user).sendMessage(message);
+					Iterator<Map.Entry<String, CheckBox>> it = cbs.entrySet().iterator();
+					String chat = label_chat.getText();
+					chat += "(to:";
+					boolean toSomeone = false;
+					while (it.hasNext()) {
+					    Map.Entry<String, CheckBox> mp = it.next();
+					    if(mp.getValue().isSelected()){
+							ClientMain.clients.get(mp.getKey()).sendMessage(user + ": " + message);
+							text_chat.setText("");
+							if(!toSomeone){ //if we haven't found someone checked yet just put a space
+								chat+= " " + mp.getKey();
+								toSomeone = true;
+							}
+							else{ //else put a comma before the space
+								chat+= ", " + mp.getKey();
+							}
+					    }
+					}
+					chat += "): " + message + "\n";
+					if(!toSomeone){
+						chat = label_chat.getText()+"(System Message) Select someone to send this message to! \n";
+					}
+					label_chat.setText(chat);
 				}
 				else{
 					text_chat.setText("");
@@ -50,7 +72,6 @@ public class ChatGUI implements Initializable{
 				String chat = label_chat.getText();
 				chat += line;
 				label_chat.setText(chat);
-				text_chat.setText("");
 			}
 			
 		});
@@ -69,14 +90,14 @@ public class ChatGUI implements Initializable{
 	
 	public void updateClientList(){
 		Iterator<String> it = ClientMain.clients.keySet().iterator();
-		
+
 		while(it.hasNext()){
 			String client = it.next();
 			if(!client.equals(user) && !clientList.contains(client)){
 				clientList.add(client);
-				
-				RadioButton r = new RadioButton(client);
-				vbox.getChildren().add(r);
+				CheckBox cb = new CheckBox(client);
+				cbs.put(client, cb);
+				vbox.getChildren().add(cb);
 			}
 		}
 	}

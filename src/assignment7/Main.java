@@ -59,7 +59,6 @@ public class Main extends Application{
 			while(it.hasNext()){
 				String user = it.next();
 				String userPass = user + " " + ClientMain.passwords.get(user) + "\n";
-				
 				fw.write(userPass);
 			}
 			fw.close();
