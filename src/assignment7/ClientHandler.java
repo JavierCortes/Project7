@@ -16,16 +16,18 @@ public class ClientHandler implements Runnable {
 	public void run() {
 		try{
 			
-			BufferedReader in = new BufferedReader(
-					new InputStreamReader(socket.getInputStream()));
-			String line = in.readLine();
-			
-			if(line != null) {
-				System.out.println(line);
+			while(true){
+				BufferedReader in = new BufferedReader(
+						new InputStreamReader(socket.getInputStream()));
+				String line = in.readLine();
+				
+				if(line != null) {
+					System.out.println(line);
+				}
 			}
 			
 		} catch (IOException e){
-			e.printStackTrace();
+			
 		}
 	}
 

@@ -3,9 +3,7 @@ package assignment7;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.*;
 
 import javax.swing.JFrame;
@@ -13,9 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-import javax.swing.UIManager.*;
-
-
+import javax.swing.UIManager.LookAndFeelInfo;
 
 public class Client {
 	String name;
@@ -34,6 +30,7 @@ public class Client {
 		} catch (Exception e) {
 		    // If Nimbus is not available, you can set the GUI to another look and feel.
 		}
+		
 		textArea.setEditable(false);
 		frame.getContentPane().add(textField, BorderLayout.SOUTH);
 		frame.getContentPane().add(new JScrollPane(textArea), BorderLayout.CENTER);
@@ -50,13 +47,12 @@ public class Client {
 	}
 	
 	public void sendMessage(String m){
-		BufferedWriter bWriter;
+		PrintWriter pWriter;
 		try {
-			bWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-			bWriter.write(m);
+			pWriter = new PrintWriter(socket.getOutputStream(), true);
+			pWriter.println(m);
 			textArea.append(m+ "\n");
 			textArea.setCaretPosition(textArea.getDocument().getLength());
-			bWriter.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -73,7 +69,6 @@ public class Client {
 	}
 
 	public void run() {
-		// TODO Auto-generated method stub
 		int i = 0;
 		while(i<1000){
 			i++;
