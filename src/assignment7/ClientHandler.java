@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 
 public class ClientHandler implements Runnable {
+	String client;
 	Socket socket;
 	
 	public ClientHandler(Socket sock){
@@ -14,22 +15,24 @@ public class ClientHandler implements Runnable {
 	public void run() {
 		BufferedReader in = null;
 		try{
+			in = new BufferedReader(
+					new InputStreamReader(socket.getInputStream()));
+			client = in.readLine();
+			
 			while(true){
-				in = new BufferedReader(
-						new InputStreamReader(socket.getInputStream()));
 				String line = in.readLine();
 				
 				if(line != null) {
-					System.out.println(line);
+					ClientMain.clientUI.get(client).gui.displayMessage(line);
 				}
 			}
 		} catch (IOException e){
-			
+			e.printStackTrace();
 		} finally{
 			try {
 				in.close();
 			} catch (IOException e) {
-				
+				e.printStackTrace();
 			}
 		}
 	}

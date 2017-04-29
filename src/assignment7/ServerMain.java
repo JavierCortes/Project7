@@ -23,7 +23,7 @@ public class ServerMain extends Observable{
 					}
 					
 				} catch (IOException e) {
-					
+					e.printStackTrace();
 				}
 			}
 		};
