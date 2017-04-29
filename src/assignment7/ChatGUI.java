@@ -34,7 +34,12 @@ public class ChatGUI implements Initializable{
 			@Override
 			public void handle(ActionEvent arg0) {
 				String message = text_chat.getText();
-				ClientMain.clients.get(user).sendMessage(message);
+				if(message!= null && (message.trim().length() > 0) ){
+					ClientMain.clients.get(user).sendMessage(message);
+				}
+				else{
+					text_chat.setText("");
+				}
 			}
 		});
 	}	
