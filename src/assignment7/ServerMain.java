@@ -31,7 +31,7 @@ public class ServerMain extends Observable{
 		clientAccept.start();
 	}
 	
-	public static void endServer(){
+	public static void closeServer(){
 		try {
 			serverSock.close();
 		} catch (IOException e) {

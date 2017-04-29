@@ -30,9 +30,10 @@ public class Main {
 			
 			if(cmd.equals("quit")){
 				clientMain.disconnectClient(name);
-				ServerMain.endServer();
+				ServerMain.closeServer();
 				done = true;
 			}
+			
 			else if(cmd.equals("send")){
 				String message = parse.nextLine().trim();
 				clientMain.clients.get(name).sendMessage(message);

@@ -1,8 +1,6 @@
 package assignment7;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.*;
 
 public class ClientHandler implements Runnable {
@@ -14,10 +12,10 @@ public class ClientHandler implements Runnable {
 
 	@Override
 	public void run() {
+		BufferedReader in = null;
 		try{
-			
 			while(true){
-				BufferedReader in = new BufferedReader(
+				in = new BufferedReader(
 						new InputStreamReader(socket.getInputStream()));
 				String line = in.readLine();
 				
@@ -25,9 +23,14 @@ public class ClientHandler implements Runnable {
 					System.out.println(line);
 				}
 			}
-			
 		} catch (IOException e){
 			
+		} finally{
+			try {
+				in.close();
+			} catch (IOException e) {
+				
+			}
 		}
 	}
 
