@@ -48,6 +48,7 @@ public class ChatGUI implements Initializable{
 				String chat = label_chat.getText();
 				chat += line;
 				label_chat.setText(chat);
+				text_chat.setText("");
 			}
 			
 		});
