@@ -23,7 +23,7 @@ public class ClientHandler implements Runnable {
 				String line = in.readLine();
 				
 				if(line != null) {
-					ClientMain.clientUI.get(client).gui.displayMessage(line);
+					ClientMain.clientUI.get(client).gui.displayMessage(line + "\n");
 				}
 			}
 		} catch (IOException e){
