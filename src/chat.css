@@ -1,0 +1,12 @@
+.button {
+	-fx-font-weight: bold;
+	-fx-text-fill: #383640;
+}
+
+#scroll .viewport{
+	-fx-background-image: url("file:///C:/Users/corte/workspace/Assignment%207/src/yale_longhorn.jpg");
+}
+
+#pane {
+	-fx-background-color: #cc5500;
+}

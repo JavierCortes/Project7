@@ -4,13 +4,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment7.ChatGUI">
+<Pane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment7.ChatGUI" stylesheets="/chat.css">
    <children>
       <TextField fx:id="text_chat" layoutX="15.0" layoutY="355.0" prefWidth="450.0" />
       <Button fx:id="btn_send" defaultButton="true" layoutX="490.0" layoutY="355.0" mnemonicParsing="false" text="Send" />
       <ScrollPane fx:id="scroll" hbarPolicy="NEVER" layoutX="14.0" layoutY="14.0" prefHeight="320.0" prefWidth="450.0">
          <content>
-            <VBox prefWidth="435.0">
+            <VBox id="boxBG" prefWidth="435.0">
                <children>
                   <Label fx:id="label_chat" prefWidth="435.0" />
                </children>
