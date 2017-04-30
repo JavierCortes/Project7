@@ -25,12 +25,12 @@ public class Client implements Observer{
 	
 	public void disconnect(){
 		try {
+			//ChatGUI.vbox.getChildren().remove(ChatGUI.cbs.get(name));
+			//ChatGUI.cbs.remove(name);
 			socket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println(name + " disconnected");
 	}
 
 	@Override

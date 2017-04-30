@@ -73,6 +73,8 @@ public class ClientMain{
 		Client c = clients.get(client);
 		c.disconnect();
 		clients.remove(client);
+
+
 	}
 	
 	public static void disconnectAll(){
